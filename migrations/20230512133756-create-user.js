@@ -27,6 +27,9 @@ module.exports = {
       password: {
         type: Sequelize.STRING
       },
+      levelUser: {
+        type: Sequelize.INTEGER
+      },
       googleAccount: {
         type: Sequelize.BOOLEAN
       },
