@@ -2,12 +2,16 @@ const { Router } = require('express');
 const UserController = require('./controllers/UserController');
 const CourseController = require('./controllers/CourseController');
 const ClassController = require('./controllers/ClassController');
+const TutorialController = require('./controllers/TutorialController');
+const FreeClassController = require('./controllers/FreeClassController');
 
 const routes = Router();
 
 routes.use('/v1/users', UserController);
 routes.use('/v1/courses', CourseController);
-routes.use('/v1/class', ClassController);
+routes.use('/v1/classes', ClassController);
+routes.use('/v1/tutorials', TutorialController);
+routes.use('/v1/freeclasses', FreeClassController);
 
 routes.use((err, req, res, next) => {
     if (err.statusCode != undefined) {
