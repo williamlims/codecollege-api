@@ -49,7 +49,7 @@ routes.delete('/:id', async (req, res) => {
     if(classes === null){
         res.json({message: 'Nenhuma aula excluída!'});
     } else {
-        res.json({message: 'Aula excluído!'});
+        res.json({message: 'Aula excluída!'});
     }
 });
 
