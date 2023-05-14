@@ -9,11 +9,10 @@ routes.get('/', async (req, res) => {
 });
 
 routes.post('/', async (req, res) => {
-    const { idControl, firstName, lastName, email, birthday, 
-            password, levelUser, googleAccount, photo } = req.body;
+    const { idControl, nameCourse, description, level, area, filePathArea } = req.body;
     try{
-        const course = await Course.create({idControl:idControl,firstName:firstName,lastName:lastName,email:email,birthday:birthday,
-                                            password:password,levelUser:levelUser,googleAccount:googleAccount,photo:photo});                        
+        const course = await Course.create({idControl:idControl,nameCourse:nameCourse,description:description,
+                                            level:level,area:area,filePathArea:filePathArea});                        
         course.save();
         return res.json(course);
     } catch(err) {
@@ -23,19 +22,18 @@ routes.post('/', async (req, res) => {
 
 routes.get('/:id', async (req, res) => {
     const course = await Course.findOne({ where: { idControl: req.params.id }, });
-    if(user === null){
+    if(course === null){
         res.json({message: 'Nenhum curso encontrado!'});
     } else {
-        res.json(user);
+        res.json(course);
     }
 });
 
 routes.put('/:id', async (req, res) => {
-    const { firstName, lastName, email, birthday, 
-        password, levelUser } = req.body;
-    const course = await Course.update({firstName:firstName,lastName:lastName,email:email,birthday:birthday,
-        password:password,levelUser:levelUser}, {where:{ idControl: req.params.id } });
-    if(user === null){
+    const { nameCourse, description, level, area, filePathArea } = req.body;
+    const course = await Course.update({nameCourse:nameCourse,description:description,
+        level:level,area:area,filePathArea:filePathArea}, {where:{ idControl: req.params.id } });
+    if(course === null){
         res.json({message: 'Nenhum curso atualizado!'});
     } else {
         res.json({message: 'Curso atualizado!'});
