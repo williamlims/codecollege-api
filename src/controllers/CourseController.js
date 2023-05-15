@@ -46,12 +46,11 @@ routes.delete('/:id', async (req, res) => {
             idControl: req.params.id
         }
     });
-    if(user === null){
+    if(course === null){
         res.json({message: 'Nenhum curso excluído!'});
     } else {
         res.json({message: 'Curso excluído!'});
     }
 });
-
 
 module.exports = routes;
