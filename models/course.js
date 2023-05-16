@@ -18,8 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     nameCourse: DataTypes.STRING,
     description: DataTypes.STRING,
     level: DataTypes.INTEGER,
-    area: DataTypes.STRING,
-    filePathArea: DataTypes.STRING
+    area: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Course',
