@@ -4,6 +4,8 @@ const CourseController = require('./controllers/CourseController');
 const ClassController = require('./controllers/ClassController');
 const TutorialController = require('./controllers/TutorialController');
 const FreeClassController = require('./controllers/FreeClassController');
+const LibraryController = require('./controllers/LibraryController');
+const ServicesController = require('./controllers/ServicesController');
 
 const routes = Router();
 
@@ -12,6 +14,8 @@ routes.use('/v1/courses', CourseController);
 routes.use('/v1/classes', ClassController);
 routes.use('/v1/tutorials', TutorialController);
 routes.use('/v1/freeclasses', FreeClassController);
+routes.use('/v1/libraries', LibraryController);
+routes.use('/v1/services', ServicesController);
 
 routes.use((err, req, res, next) => {
     if (err.statusCode != undefined) {

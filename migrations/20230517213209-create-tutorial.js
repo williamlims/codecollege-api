@@ -19,7 +19,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       subject: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       filePath: {
         type: Sequelize.STRING

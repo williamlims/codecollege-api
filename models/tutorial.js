@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     idControl: DataTypes.STRING,
     nameTutorial: DataTypes.STRING,
     level: DataTypes.INTEGER,
-    subject: DataTypes.STRING,
+    subject: DataTypes.INTEGER,
     filePath: DataTypes.STRING
   }, {
     sequelize,

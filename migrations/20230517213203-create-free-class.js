@@ -18,8 +18,11 @@ module.exports = {
       description: {
         type: Sequelize.STRING
       },
+      level: {
+        type: Sequelize.INTEGER
+      },
       subject: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       linkYoutube: {
         type: Sequelize.STRING

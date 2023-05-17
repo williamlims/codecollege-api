@@ -1,5 +1,7 @@
 const { Tutorial } = require('../../models');
 const { Router } = require('express');
+require('dotenv').config();
+const fs = require('fs');
 const path = require("path");
 const { Console } = require('console');
 const uuid = require('uuid');
@@ -12,32 +14,28 @@ routes.get('/', async (req, res) => {
 });
 
 routes.post('/', async (req, res) => {
-    const { idControl, nameTutorial, level, subject, filePath } = req.body;
-    try{
-        const tutorial = await Tutorial.create({idControl:idControl,nameTutorial:nameTutorial,level:level,
-                                            subject:subject,filePath:filePath});                        
-        tutorial.save();
-        return res.json(tutorial);
-    } catch(err) {
-        return res.status(500).json({error: err});
-    }
-});
-
-routes.post('/file', (req, res) => {
+    const { idControl, nameTutorial, level, subject } = req.body;
     if (!req.files.fileDocument) {
         return res.json({message: "Nenhum arquivo enviado!"});
     } else {
-        const file = req.files.fileDocument; // change name
+        const file = req.files.fileDocument;
         if(file.mimetype !== 'application/pdf') {
             return res.json({message: "Tipo de arquivo deve ser PDF!"});
         }
         let uuidname = uuid.v1();
-        let imgsrc = 'http://127.0.0.1:3001/files/tutorials/' + uuidname + file.name;
-        file.mv('public/files/tutorials/' + uuidname + file.name, (err) => {
+        let imgsrc = process.env.URL_API + '/files/tutorials/' + uuidname + file.name;
+        file.mv('public/files/tutorials/' + uuidname + file.name, async (err) => {
             if (err) {
               return res.status(500).json({message: err});
             }
-            return res.status(200).json({message: imgsrc});
+            try{
+                const tutorial = await Tutorial.create({idControl:idControl,nameTutorial:nameTutorial,level:level,
+                                                    subject:subject,filePath:imgsrc});                        
+                tutorial.save();
+                return res.json(tutorial);
+            } catch(err) {
+                return res.status(500).json({message: err});
+            }
         });
     }
 });

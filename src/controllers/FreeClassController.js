@@ -9,9 +9,9 @@ routes.get('/', async (req, res) => {
 });
 
 routes.post('/', async (req, res) => {
-    const { idControl, nameClass, description, subject, linkYoutube } = req.body;
+    const { idControl, nameClass, description, level, subject, linkYoutube } = req.body;
     try{
-        const classes = await FreeClass.create({idControl:idControl,nameClass:nameClass,description:description,
+        const classes = await FreeClass.create({idControl:idControl,nameClass:nameClass,description:description,level:level, 
                                             subject:subject,linkYoutube:linkYoutube});                        
         classes.save();
         return res.json(classes);
@@ -30,8 +30,8 @@ routes.get('/:id', async (req, res) => {
 });
 
 routes.put('/:id', async (req, res) => {
-    const { nameClass, description, subject, linkYoutube } = req.body;
-    const classes = await FreeClass.update({nameClass:nameClass,description:description,
+    const { nameClass, description, level, subject, linkYoutube } = req.body;
+    const classes = await FreeClass.update({nameClass:nameClass,description:description,level:level,
         subject:subject,linkYoutube:linkYoutube}, {where:{ idControl: req.params.id } });
     if(classes === null){
         res.json({message: 'Nenhuma aula atualizada!'});
