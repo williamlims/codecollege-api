@@ -1,5 +1,8 @@
 const { Tutorial } = require('../../models');
 const { Router } = require('express');
+const path = require("path");
+const { Console } = require('console');
+const uuid = require('uuid');
 
 const routes = Router();
 
@@ -16,7 +19,26 @@ routes.post('/', async (req, res) => {
         tutorial.save();
         return res.json(tutorial);
     } catch(err) {
-        return res.status(500).json(err);
+        return res.status(500).json({error: err});
+    }
+});
+
+routes.post('/file', (req, res) => {
+    if (!req.files.fileDocument) {
+        return res.json({message: "Nenhum arquivo enviado!"});
+    } else {
+        const file = req.files.fileDocument; // change name
+        if(file.mimetype !== 'application/pdf') {
+            return res.json({message: "Tipo de arquivo deve ser PDF!"});
+        }
+        let uuidname = uuid.v1();
+        let imgsrc = 'http://127.0.0.1:3001/files/tutorials/' + uuidname + file.name;
+        file.mv('public/files/tutorials/' + uuidname + file.name, (err) => {
+            if (err) {
+              return res.status(500).json({message: err});
+            }
+            return res.status(200).json({message: imgsrc});
+        });
     }
 });
 

@@ -1,9 +1,12 @@
 const express = require('express');
 const fileUpload = require('express-fileupload');
+const path = require("path");
 const cors = require('cors');
 const app = express();
 const routes = require('./routes');
 const dotenv = require('dotenv');
+const bodyparser = require('body-parser');
+const uuid = require('uuid');
 dotenv.config();
 
 const corsOptions = {
@@ -13,10 +16,15 @@ const corsOptions = {
     "optionsSuccessStatus": 204
 };
 
+app.use(bodyparser.json());
+app.use(bodyparser.urlencoded({
+    extended: true
+}));
 
+app.use(fileUpload());
+app.use(express.static('./public'));
 app.use(express.json());
 app.use(cors(corsOptions));
 app.use(routes);
-app.use(fileUpload());
 
 module.exports = app;
