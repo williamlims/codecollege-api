@@ -6,6 +6,7 @@ const TutorialController = require('./controllers/TutorialController');
 const FreeClassController = require('./controllers/FreeClassController');
 const LibraryController = require('./controllers/LibraryController');
 const ServicesController = require('./controllers/ServicesController');
+const GroupController = require('./controllers/GroupController');
 
 const routes = Router();
 
@@ -15,6 +16,7 @@ routes.use('/v1/classes', ClassController);
 routes.use('/v1/tutorials', TutorialController);
 routes.use('/v1/freeclasses', FreeClassController);
 routes.use('/v1/libraries', LibraryController);
+routes.use('/v1/groups', GroupController);
 routes.use('/v1/services', ServicesController);
 
 routes.use((err, req, res, next) => {
