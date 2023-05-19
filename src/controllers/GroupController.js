@@ -1,4 +1,5 @@
-const { Group } = require('../../models');
+const { Group, GroupUsers, GroupCourses, GroupTutorials, 
+        GroupClasses, GroupLibrary, db } = require('../../models');
 const { Router } = require('express');
 
 const routes = Router();
@@ -50,6 +51,66 @@ routes.delete('/:id', async (req, res) => {
         res.json({message: 'Nenhum Grupo excluído!'});
     } else {
         res.json({message: 'Grupo excluído!'});
+    }
+});
+
+routes.post('/users', async (req, res) => {
+    const { idControlUser, idControlGroup } = req.body;
+    try{
+        const gu = await GroupUsers.create({idControlUser:idControlUser,
+                                                    idControlGroup:idControlGroup});                        
+        gu.save();
+        return res.json(gu);
+    } catch(err) {
+        return res.status(500).json(err);
+    }
+});
+
+routes.post('/courses', async (req, res) => {
+    const { idControlCourse, idControlGroup } = req.body;
+    try{
+        const gc = await GroupCourses.create({idControlCourse:idControlCourse,
+                                                    idControlGroup:idControlGroup});                        
+        gc.save();
+        return res.json(gc);
+    } catch(err) {
+        return res.status(500).json(err);
+    }
+});
+
+routes.post('/tutorials', async (req, res) => {
+    const { idControlTutorial, idControlGroup } = req.body;
+    try{
+        const gt = await GroupTutorials.create({idControlTutorial:idControlTutorial,
+                                                    idControlGroup:idControlGroup});                        
+        gt.save();
+        return res.json(gt);
+    } catch(err) {
+        return res.status(500).json(err);
+    }
+});
+
+routes.post('/classes', async (req, res) => {
+    const { idControlClass, idControlGroup } = req.body;
+    try{
+        const gcl = await GroupClasses.create({idControlClass:idControlClass,
+                                                    idControlGroup:idControlGroup});                        
+        gcl.save();
+        return res.json(gcl);
+    } catch(err) {
+        return res.status(500).json(err);
+    }
+});
+
+routes.post('/libraries', async (req, res) => {
+    const { idControlLibrary, idControlGroup } = req.body;
+    try{
+        const gl = await GroupLibrary.create({idControlLibrary:idControlLibrary,
+                                                    idControlGroup:idControlGroup});                        
+        gl.save();
+        return res.json(gl);
+    } catch(err) {
+        return res.status(500).json(err);
     }
 });
 
