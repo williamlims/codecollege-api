@@ -33,10 +33,4 @@ routes.get('/getaccess', async (req, res) => {
     return res.json(access);
 });
 
-routes.get('/test', async (req, res) => {
-    const [results, metadata] = await sequelize.query("select * from groups where idControl='G2023R4O17U3P23I0D41C370T' ");
-    return res.json(results);
-});
-
-
 module.exports = routes;
