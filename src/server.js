@@ -5,8 +5,8 @@ const fs = require("fs");
 const port = 3001;
 
 const certs = {
-    key: fs.readFileSync("src/services/cert/ca_bundle.pem"),
-    cert: fs.readFileSync("src/services/cert/certificate.pem"),
+    key: fs.readFileSync("src/services/cert/ca_bundle.crt"),
+    cert: fs.readFileSync("src/services/cert/certificate.crt"),
 };
 
 https.createServer(certs, app).listen(port, ()=>{
