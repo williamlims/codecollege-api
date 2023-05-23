@@ -5,7 +5,7 @@ const fs = require("fs");
 const port = 3001;
 
 const certs = {
-    key: fs.readFileSync("src/services/cert/ca_bundle.crt"),
+    key: fs.readFileSync("src/services/cert/private.key"),
     cert: fs.readFileSync("src/services/cert/certificate.crt"),
 };
 
