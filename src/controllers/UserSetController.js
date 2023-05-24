@@ -4,13 +4,13 @@ const { Router } = require('express');
 const routes = Router();
 
 routes.get('/courses/:id', async (req, res) => {
-    const sql = "SELECT courses.idControl, courses.nameCourse, courses.description "+
-                "FROM courses INNER JOIN groupcourses "+
-                "ON courses.idControl = groupcourses.idControlCourse INNER JOIN codecollege.groups "+
-                "ON groupcourses.idControlGroup = codecollege.groups.idControl INNER JOIN groupusers "+
-                "ON codecollege.groups.idControl = groupusers.idControlGroup INNER JOIN users "+
-                "ON groupusers.idControlUser = users.idControl "+
-                "where users.idControl = (:id)";
+    const sql = "SELECT Courses.idControl, Courses.nameCourse, Courses.description "+
+                "FROM Courses INNER JOIN GroupCourses "+
+                "ON Courses.idControl = GroupCourses.idControlCourse INNER JOIN codecollege.Groups "+
+                "ON GroupCourses.idControlGroup = codecollege.Groups.idControl INNER JOIN GroupUsers "+
+                "ON codecollege.Groups.idControl = GroupUsers.idControlGroup INNER JOIN Users "+
+                "ON GroupUsers.idControlUser = Users.idControl "+
+                "where Users.idControl = (:id)";
     const crsUs = await db.sequelize.query(sql, { replacements: {id: req.params.id}, type: db.sequelize.QueryTypes.SELECT});
     res.json(crsUs);
 });
