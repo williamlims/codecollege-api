@@ -61,7 +61,7 @@ routes.put('/:id', async (req, res) => {
 });
 
 routes.delete('/:id', async (req, res) => {
-    const tutorial = await Class.destroy({
+    const tutorial = await Tutorial.destroy({
         where: {
             idControl: req.params.id
         }
